@@ -1,0 +1,60 @@
+config
+
+int e0.0
+ ip add 221.139.196.156 255.255.255.224     <-- public IP
+ route 0.0.0.0 0.0.0.0 221.139.196.129      <-- default gateway
+ no sh
+ exit
+int e1.0
+ ip add dhcp  <-- private ip backup
+ no sh
+ exit
+
+snmp community 221.139.196.134 cisco ro
+
+ntp refresh 5
+ntp offset 08:00
+ntp server 116.193.170.16
+
+voice-port 0/0
+ input gain -4        <-- up to volume
+ no comfort-noise     <-- disable white noise filter
+
+dial-peer voice 0 pots
+ destination-pattern 10000 <-- sip account from VOIP provider
+ port 0/0
+ user-password password10000 <-- password from VOIP provider
+
+dial-peer voice 1000 voip <-- VOIP default gateway
+ destination-pattern T
+ session target sip-server
+ session protocol sip
+ voice-class codec 0
+ no vad
+ dtmf-relay rtp-2833
+ translate-outgoing called-number 0
+
+gateway
+ h323-id voip.211.240.2.56
+ no ignore-msg-from-other-gk
+
+ voice class codec 0
+ codec preference 1 g729
+ codec preference 2 g711ulaw
+ codec preference 3 g711alaw
+ codec preference 4 g7231r63
+
+translation-rule 0  <-- call number translation rule
+ rule 1      86T                      00700%01%99
+ rule 2      853T                     00700%01%99
+ rule 3      852T                     00700%01%99
+
+
+sip-ua <-- sip server ip address and local domain
+ sip-server 151.151.151.111
+ set-local-domain 151.151.151.111
+ register e164
+
+mgcp
+ codec g711ulaw
+ vad
