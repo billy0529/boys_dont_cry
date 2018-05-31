@@ -85,8 +85,8 @@ interface Dialer1
  dialer pool 1
  no cdp enable
  ppp authentication chap pap ms-chap ms-chap-v2 eap callin
- ppp chap hostname xxxxxx     ### PLDT provide username
- ppp chap password 0 xxxxxx  ### PLDT provider password
+ ppp chap hostname 24059741     ### PLDT provide username
+ ppp chap password 0 654790507   ### PLDT provider password
 !
 ip classless
 ip route 0.0.0.0 0.0.0.0 Dialer1
