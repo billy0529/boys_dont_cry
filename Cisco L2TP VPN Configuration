@@ -15,7 +15,7 @@ vpdn-group VPDN
  accept-dialin
   protocol l2tp
   virtual-template 1
- no l2tp tunnel authentication
+ no l2tp tunnel authentication            
 !
 username billy privilege 15 password 7 121A0C041104
 !
@@ -25,7 +25,7 @@ crypto isakmp policy 10
  authentication pre-share
  group 2
  lifetime 3600
-crypto isakmp key cisco address 0.0.0.0 0.0.0.0
+crypto isakmp key cisco address 0.0.0.0 0.0.0.0          
 crypto isakmp fragmentation
 !
 !
@@ -58,10 +58,10 @@ interface FastEthernet0/1
  speed auto
  crypto map vpn
 !
-interface Virtual-Template1
- ip unnumbered FastEthernet0/0
- peer default ip address pool l2tp
- ppp mtu adaptive
+interface Virtual-Template1            ### 'ip nat inside' command is needed if local pool has to be nat translated 
+ ip unnumbered FastEthernet0/0         ### 'ppp authentication' command is needed if the client must be verified via chap, ms-chap
+ peer default ip address pool l2tp       
+ ppp mtu adaptive 
 !
 ip local pool l2tp 10.1.12.100 10.1.12.200
 ip forward-protocol nd
