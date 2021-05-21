@@ -1,0 +1,9 @@
+- name: Config DNS server
+  hosts: centos7
+  remote_user: root
+
+  tasks:
+  - name: edit security options in /etc/nemed.conf
+    ansible.builtin.yum:
+        name: bind
+        state: latest
