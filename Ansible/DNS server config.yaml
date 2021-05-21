@@ -3,7 +3,7 @@
   remote_user: root
 
   tasks:
-  - name: edit security options in /etc/nemed.conf
+  - name: edit security options in /etc/named.conf
     ansible.builtin.yum:
         name: bind
         state: latest
