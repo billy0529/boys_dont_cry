@@ -7,5 +7,6 @@
     ansible.builtin.yum:
         name: bind
         state: latest
+
   - name: add DNS service to firewall
     command: firewall-cmd --permanent --add-service=dns
