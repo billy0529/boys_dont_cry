@@ -10,4 +10,5 @@
 
   - name: add DNS service to firewall
     command: firewall-cmd --permanent --add-service=dns
+    command: firewall-cmd --reload
     
