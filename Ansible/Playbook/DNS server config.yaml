@@ -27,9 +27,9 @@
 
   - name: disable SELinux
     ansible.builtin.replace:
-    path: /etc/sysconfig/selinux
-    regexp: 'SELINUX=enforcing'
-    replaces: 'SELINUX=disabled'
+      path: /etc/sysconfig/selinux
+      regexp: 'SELINUX=enforcing'
+      replace: 'SELINUX=disabled'
 
   - name: edit ssh authentication
     ansible.builtin.replace:
@@ -37,8 +37,14 @@
       regexp: '#PermitRootLogin yes'
       replace: 'PermitRootLogin yes'
 
+  - name: edit ssh pw authentication
+    ansible.builtin.replace:
+      path: /etc/ssh/sshd_config
+      regexp: '#PasswordAuthentication yes'
+      replace: 'PasswordAuthentication yes'
+
   - name: reload ssh
-    command: systemctl restart ssh  
+    command: systemctl restart sshd  
 
   - name: add dns rule permanently
     firewalld:
