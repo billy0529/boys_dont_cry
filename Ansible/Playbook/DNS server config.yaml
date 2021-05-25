@@ -1,0 +1,71 @@
+- name: Config DNS server
+  hosts: centos7
+  remote_user: root
+
+  tasks:
+  - name: edit security options in /etc/named.conf
+    ansible.builtin.yum:
+      name: bind
+      state: latest
+
+  - name: install epel-release
+    yum:
+      name: epel-release
+      state: latest
+
+  - name: new file
+    file: 
+      path: "~/text.txt"
+      state: touch
+
+  - name: new file with content
+    copy:
+      dest: "~/text.txt"
+      content: |
+        test is test
+        test is test2
+
+  - name: disable SELinux
+    ansible.builtin.replace:
+      path: /etc/sysconfig/selinux
+      regexp: 'SELINUX=enforcing'
+      replace: 'SELINUX=disabled'
+
+  - name: edit ssh pw authentication
+    ansible.builtin.replace:
+      path: /etc/ssh/sshd_config
+      regexp: '#PasswordAuthentication yes'
+      replace: 'PasswordAuthentication yes'
+
+  - name: edit ssh authentication
+    ansible.builtin.replace:
+      path: /etc/ssh/sshd_config
+      regexp: '#PermitRootLogin yes'
+      replace: 'PermitRootLogin yes'
+
+  - name: reload ssh
+    command: systemctl restart sshd  
+
+  - name: add dns rule permanently
+    firewalld:
+      service: dns
+      permanent: yes
+      state: enabled
+
+  - name: add port 53 tcp/udp
+    firewalld:
+      port: "{{ item }}"
+      permanent: yes
+      state: enabled
+    loop:
+      - 53/tcp
+      - 53/udp
+  
+  - name: reload firewall
+    command: firewall-cmd --reload
+    
+  - name: replace ip of DNS allow-list
+    ansible.builtin.replace:
+      path: /etc/named.conf
+      regexp: '103.82.116.0/24'
+      replace: '103.82.116.0/22'
