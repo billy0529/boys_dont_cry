@@ -12,9 +12,18 @@
     yum:
       name: epel-release
       state: latest
+  
+  - name: add dns rule permanently
+    firewalld:
+      service: dns
+      permanent: yes
+      state: enabled
 
-  - name: add DNS service to firewall
-    command: firewall-cmd --permanent --add-service=dns
+  - name: add port 53 tcp/udp
+    firewalld:
+      port: 53/tcp, 53/udp
+      permanent: yes
+      state: enabled
   
   - name: reload firewall
     command: firewall-cmd --reload
