@@ -12,7 +12,34 @@
     yum:
       name: epel-release
       state: latest
-  
+
+  - name: new file
+    file: 
+      path: "~/text.txt"
+      state: touch
+
+  - name: new file with content
+    copy:
+      dest: "~/text.txt"
+      content: |
+        test is test
+        test is test2
+
+  - name: disable SELinux
+    ansible.builtin.replace:
+    path: /etc/sysconfig/selinux
+    regexp: 'SELINUX=enforcing'
+    replaces: 'SELINUX=disabled'
+
+  - name: edit ssh authentication
+    ansible.builtin.replace:
+      path: /etc/ssh/sshd_config
+      regexp: '#PermitRootLogin yes'
+      replace: 'PermitRootLogin yes'
+
+  - name: reload ssh
+    command: systemctl restart ssh  
+
   - name: add dns rule permanently
     firewalld:
       service: dns
@@ -21,9 +48,12 @@
 
   - name: add port 53 tcp/udp
     firewalld:
-      port: 53/tcp, 53/udp
+      port: "{{ item }}"
       permanent: yes
       state: enabled
+    loop:
+      - 53/tcp
+      - 53/udp
   
   - name: reload firewall
     command: firewall-cmd --reload
@@ -33,4 +63,3 @@
       path: /etc/named.conf
       regexp: '103.82.116.0/24'
       replace: '103.82.116.0/22'
-
