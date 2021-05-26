@@ -3,9 +3,14 @@
   remote_user: root
 
   tasks:
-  - name: edit security options in /etc/named.conf
+  - name: install DNS latest
     ansible.builtin.yum:
       name: bind
+      state: latest
+
+  - name: install NTP lates
+    ansible.builtin.yum:
+      name: chrony
       state: latest
 
   - name: install epel-release
