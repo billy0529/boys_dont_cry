@@ -3,12 +3,13 @@ from netmiko.cisco import CiscoIosSSH, CiscoIosTelnet
 
 osma = {
     'device_type': 'cisco_ios',
-    'host': '103.82.118.1',
+    'host': '203.231.96.58',
     'username': '=billyne=',
-    'password': ''
+    'password': '!!GGkswodls61'
 }
 net_connect = ConnectHandler(**osma)
-output = net_connect.send_command('show int status')
-print(output)
-
+commands = ['interface g3/19',
+            'description TESTSSH-2']
+result = net_connect.send_config_set(commands)
+print(result)
 
