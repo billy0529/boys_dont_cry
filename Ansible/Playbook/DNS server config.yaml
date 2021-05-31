@@ -1,6 +1,6 @@
 - name: Config DNS server
   hosts: centos7
-  remote_user: root
+  remote_user: billy
 
   tasks:
   - name: install DNS latest
