@@ -15,7 +15,7 @@
   
   - name: install vsftpd, ftp
     ansible.builtin.yum:
-      name: vsftpd ftp
+      name: vsftpd, ftp
       state: latest
 
   - name: install epel-release
