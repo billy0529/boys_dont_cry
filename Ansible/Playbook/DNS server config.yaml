@@ -12,6 +12,11 @@
     ansible.builtin.yum:
       name: chrony
       state: latest
+  
+  - name: install vsftpd, ftp
+    ansible.builtin.yum:
+      name: vsftpd ftp
+      state: latest
 
   - name: install epel-release
     yum:
@@ -65,6 +70,13 @@
     loop:
       - 53/tcp
       - 53/udp
+
+  - name: add port 21 ftp
+    firewalld:
+      port: 21/tcp
+      service: ftp
+      permanent: yes
+      state: enabled
   
   - name: reload firewall
     command: firewall-cmd --reload
