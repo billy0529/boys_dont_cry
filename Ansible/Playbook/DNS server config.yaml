@@ -3,37 +3,16 @@
   remote_user: billy
 
   tasks:
-  - name: install DNS latest
-    ansible.builtin.yum:
-      name: bind
-      state: latest
-
-  - name: install NTP lates
-    ansible.builtin.yum:
-      name: chrony
-      state: latest
-  
-  - name: install vsftpd, ftp
-    ansible.builtin.yum:
-      name: vsftpd, ftp
-      state: latest
-
-  - name: install epel-release
+  - name: install packages
     yum:
-      name: epel-release
+      name:
+        - bind
+        - chrony
+        - vsftpd
+        - ftp
+        - epel-release
       state: latest
-
-  - name: new file
-    file: 
-      path: "~/text.txt"
-      state: touch
-
-  - name: new file with content
-    copy:
-      dest: "~/text.txt"
-      content: |
-        test is test
-        test is test2
+    become: yes   
 
   - name: disable SELinux
     ansible.builtin.replace:
@@ -45,22 +24,26 @@
     ansible.builtin.replace:
       path: /etc/ssh/sshd_config
       regexp: '#PasswordAuthentication yes'
-      replace: 'PasswordAuthentication yes'
+      replace: 'PasswordAuthentication yes'     
+    become: yes   
 
   - name: edit ssh authentication
     ansible.builtin.replace:
       path: /etc/ssh/sshd_config
       regexp: '#PermitRootLogin yes'
       replace: 'PermitRootLogin yes'
+    become: yes
 
   - name: reload ssh
     command: systemctl restart sshd  
+    become: yes
 
   - name: add dns rule permanently
     firewalld:
       service: dns
       permanent: yes
       state: enabled
+    become: yes
 
   - name: add port 53 tcp/udp
     firewalld:
@@ -70,19 +53,29 @@
     loop:
       - 53/tcp
       - 53/udp
+    become: yes
 
-  - name: add port 21 ftp
+  - name: add tcp service
     firewalld:
-      port: 21/tcp
       service: ftp
       permanent: yes
       state: enabled
+    become: yes
+
+  - name: add port 21
+    firewalld:
+      port: 21/tcp
+      permanent: yes
+      state: enabled
+    become: yes
   
   - name: reload firewall
     command: firewall-cmd --reload
+    become: yes
     
   - name: replace ip of DNS allow-list
     ansible.builtin.replace:
       path: /etc/named.conf
       regexp: '103.82.116.0/24'
       replace: '103.82.116.0/22'
+    become: yes
