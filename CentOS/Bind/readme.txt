@@ -1,3 +1,0 @@
-
-
-BIND Sample Configs
