@@ -1,0 +1,52 @@
+
+
+
+
+// 폴더 위치 /etc/named.rfc1912.zones
+// 사설 DNS 조회는 순서대로 이므로 임의로 넣은 ZONE이 상위로 올수 있도록
+
+
+zone "localhost.localdomain" IN {
+        type master;
+        file "named.localhost";
+        allow-update { none; };
+};
+
+// billy.com 정방향
+zone "billy.com" IN { 
+        type master;
+        file "billy.com.zone";
+        allow-update { none; };
+        allow-transfer { 103.82.116.0/22; };
+};
+
+// billy.com 역방향, 정방향은 한개만 생성하면 되지만, 역방향은 아이피 가짓수 만큼 생성해야함
+zone "118.82.103.in-addr.arpa" IN {
+        type master;
+        file "118.82.103.in-addr.arpa";
+        allow-update { none; };
+};
+
+zone "localhost" IN {
+        type master;
+        file "named.localhost";
+        allow-update { none; };
+};
+
+zone "1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.ip6.arpa" IN {
+        type master;
+        file "named.loopback";
+        allow-update { none; };
+};
+
+zone "1.0.0.127.in-addr.arpa" IN {
+        type master;
+        file "named.loopback";
+        allow-update { none; };
+};
+
+zone "0.in-addr.arpa" IN {
+        type master;
+        file "named.empty";
+        allow-update { none; };
+};

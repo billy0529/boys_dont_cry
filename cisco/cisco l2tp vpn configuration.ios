@@ -1,0 +1,75 @@
+
+ip dhcp excluded-address 192.168.0.1
+!
+ip dhcp pool test
+ network 192.168.0.0 255.255.255.0
+ dns-server 8.8.8.8 8.8.4.4
+ default-router 192.168.0.1
+ lease 0 0 10
+!
+
+vpdn enable
+!
+vpdn-group VPDN
+ ! Default L2TP VPDN group
+ accept-dialin
+  protocol l2tp
+  virtual-template 1
+ no l2tp tunnel authentication            
+!
+username billy privilege 15 password 7 121A0C041104
+!
+!
+crypto isakmp policy 10
+ encr 3des
+ authentication pre-share
+ group 2
+ lifetime 3600
+crypto isakmp key cisco address 0.0.0.0 0.0.0.0          
+crypto isakmp fragmentation
+!
+!
+crypto ipsec transform-set PHASE2 esp-3des esp-sha-hmac
+ mode transport
+!
+crypto dynamic-map DMAP 10
+ set nat demux
+ set transform-set PHASE2
+!
+!
+crypto map vpn 10 ipsec-isakmp dynamic DMAP
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ ip address 150.1.1.1 255.255.255.0
+ ip nat outside
+ ip virtual-reassembly in
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ ip address 192.168.0.1 255.255.255.0
+ ip nat inside
+ ip virtual-reassembly in
+ duplex auto
+ speed auto
+ crypto map vpn
+!
+interface Virtual-Template1            ### 'ip nat inside' command is needed if local pool has to be nat translated 
+ ip unnumbered FastEthernet0/0         ### 'ppp authentication' command is needed if the client must be verified via chap, ms-chap
+ peer default ip address pool l2tp       
+ ppp mtu adaptive 
+!
+ip local pool l2tp 10.1.12.100 10.1.12.200
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+!
+ip nat inside source list DHCP_HOST interface FastEthernet0/0 overload
+!
+ip access-list standard DHCP_HOST
+ permit 192.168.0.0 0.0.0.255

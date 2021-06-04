@@ -1,0 +1,23 @@
+### PPTP VPDN Configuration
+### PAT using nat pool 
+
+vpdn enable
+!
+vpdn-group 1
+! Default PPTP VPDN group
+ accept-dialin
+  protocol pptp
+  virtual-template 1
+
+
+  interface Virtual-Template1
+ ip unnumbered FastEthernet0/0
+ ip nat inside
+ peer default ip address pool vpn
+ no keepalive
+ ppp authentication pap chap ms-chap ms-chap-v2
+!
+ip local pool vpn 192.168.101.1 192.168.101.250
+
+
+ip nat inside source list 1 interface FastEthernet0/0 overload
