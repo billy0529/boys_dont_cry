@@ -3,7 +3,7 @@
   remote_user: billy
 
   tasks:
-  - name: install packages
+  - name: install packages upto latest
     yum:
       name:
         - bind
