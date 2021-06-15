@@ -23,7 +23,9 @@ ansible_ssh_private_key_file=~/.ssh/id_rsa
 80.5.29.3
 
 [centos7]
-centos7_DNS ansible_host=103.82.118.5 ansible_user=billy ansible_port=22
+operation ansible_host=202.124.252.19 ansible_user=billy ansible_port=22
+primary ansible_host=202.124.252.20 ansible_user=billy ansible_port=22
+secondary ansible_host=202.124.252.21 ansible_user=billy ansible_port=22
 
 [centos7:vars]
 ansible_become_pass=!!GGkswodls61
