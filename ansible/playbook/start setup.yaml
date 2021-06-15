@@ -26,11 +26,23 @@
       replace: 'PasswordAuthentication yes'     
     become: yes   
 
-  - name: edit ssh authentication
+  - name: disabling ssh root login
     ansible.builtin.replace:
       path: /etc/ssh/sshd_config
       regexp: '#PermitRootLogin yes'
-      replace: 'PermitRootLogin yes'
+      replace: 'PermitRootLogin no'
+    become: yes
+
+  - name: add text to ssh hosts
+    blockinfile:
+      path: /etc/hosts.allow
+      insertafter: "tcp_wrappers"
+      block: |
+        sshd:202.124.252.0/22:allow
+        sshd:61.252.172.0/22:allow
+        sshd:103.82.116.0/22:allow
+        sshd:ALL:deny
+      state: present
     become: yes
 
   - name: reload ssh
