@@ -1,0 +1,42 @@
+- name: start setup
+  hosts: centos7
+  remote_user: billy
+
+  tasks:
+  - name: install packages upto latest
+    yum:
+      name:
+        - chrony
+        - net-tools
+        - epel-release
+        - python3
+      state: latest
+    become: yes   
+
+  - name: disable SELinux
+    ansible.builtin.replace:
+      path: /etc/sysconfig/selinux
+      regexp: 'SELINUX=enforcing'
+      replace: 'SELINUX=disabled'
+
+  - name: edit ssh pw authentication
+    ansible.builtin.replace:
+      path: /etc/ssh/sshd_config
+      regexp: '#PasswordAuthentication yes'
+      replace: 'PasswordAuthentication yes'     
+    become: yes   
+
+  - name: edit ssh authentication
+    ansible.builtin.replace:
+      path: /etc/ssh/sshd_config
+      regexp: '#PermitRootLogin yes'
+      replace: 'PermitRootLogin yes'
+    become: yes
+
+  - name: reload ssh
+    command: systemctl restart sshd  
+    become: yes
+  
+  - name: reload firewall
+    command: firewall-cmd --reload
+    become: yes
