@@ -1,9 +1,6 @@
-a = [1,2,3,4]
-def mulpy(n):
-    y = n * 2
-    return y
-print(map(mulpy, range(5)))
+import sys
 
-
-
-
+print("THIS AGE CALCULATOR")
+name_a = input("Name: ")
+bday_a = input("Birthday(yymmdd): ")
+date_a = input("Current Date(yymmdd): ")

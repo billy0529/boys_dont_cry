@@ -10,6 +10,7 @@
         - chrony
         - vsftpd
         - ftp
+        - net-tools
         - epel-release
       state: latest
     become: yes   
@@ -72,10 +73,4 @@
   - name: reload firewall
     command: firewall-cmd --reload
     become: yes
-    
-  - name: replace ip of DNS allow-list
-    ansible.builtin.replace:
-      path: /etc/named.conf
-      regexp: '103.82.116.0/24'
-      replace: '103.82.116.0/22'
-    become: yes
+  
