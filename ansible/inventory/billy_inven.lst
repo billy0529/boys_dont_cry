@@ -28,4 +28,4 @@ primary ansible_host=202.124.252.20 ansible_user=billy ansible_port=22
 secondary ansible_host=202.124.252.21 ansible_user=billy ansible_port=22
 
 [centos7:vars]
-ansible_become_pass=!!GGkswodls61
+ansible_become_pass='{{ billy_become_pass }}'

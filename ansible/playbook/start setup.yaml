@@ -1,6 +1,10 @@
 - name: start setup
   hosts: centos7
   remote_user: billy
+  become: yes
+  become_user: root
+  vars_files:
+    - ~/inventory/vault_vars.yml
 
   tasks:
   - name: install packages upto latest
@@ -11,7 +15,6 @@
         - epel-release
         - python3
       state: latest
-    become: yes   
 
   - name: disable SELinux
     ansible.builtin.replace:
@@ -24,14 +27,12 @@
       path: /etc/ssh/sshd_config
       regexp: '#PasswordAuthentication yes'
       replace: 'PasswordAuthentication yes'     
-    become: yes   
 
   - name: disabling ssh root login
     ansible.builtin.replace:
       path: /etc/ssh/sshd_config
       regexp: '#PermitRootLogin yes'
       replace: 'PermitRootLogin no'
-    become: yes
 
   - name: add text to ssh hosts
     blockinfile:
@@ -43,12 +44,9 @@
         sshd:103.82.116.0/22:allow
         sshd:ALL:deny
       state: present
-    become: yes
 
   - name: reload ssh
     command: systemctl restart sshd  
-    become: yes
   
   - name: reload firewall
     command: firewall-cmd --reload
-    become: yes
