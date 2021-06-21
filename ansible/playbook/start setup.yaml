@@ -1,5 +1,5 @@
 - name: start setup
-  hosts: centos7
+  hosts: centos7_all
   remote_user: billy
   become: yes
   become_user: root
