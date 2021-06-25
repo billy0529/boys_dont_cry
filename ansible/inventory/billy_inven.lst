@@ -25,7 +25,6 @@ ansible_ssh_private_key_file=~/.ssh/id_rsa
 [centos7_all]
 operation ansible_host=202.124.252.19 ansible_user=billy ansible_port=22
 primary ansible_host=202.124.252.20 ansible_user=billy ansible_port=22
-secondary ansible_host=202.124.252.21 ansible_user=billy ansible_port=22
 
 [centos7_operation]
 operation ansible_host=202.124.252.19 ansible_user=billy ansible_port=22
@@ -33,8 +32,11 @@ operation ansible_host=202.124.252.19 ansible_user=billy ansible_port=22
 [centos7_primary]
 primary ansible_host=202.124.252.20 ansible_user=billy ansible_port=22
 
-[centos7_secondary]
-secondary ansible_host=202.124.252.21 ansible_user=billy ansible_port=22
-
 [centos7_all:vars]
+ansible_become_pass='{{ billy_become_pass }}'
+
+[centos8]
+zabbix ansible_host=202.124.252.21 ansible_user=billy ansible_port=22
+
+[centos8:vars]
 ansible_become_pass='{{ billy_become_pass }}'
