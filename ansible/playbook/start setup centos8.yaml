@@ -1,0 +1,46 @@
+- name: start setup
+  hosts: centos8
+  remote_user: billy
+  become: yes
+  become_user: root
+  vars_files:
+    - ~/inventory/vault_vars.yml
+
+  tasks:
+  - name: install packages upto latest
+    yum:
+      name:
+        - chrony
+        - net-tools
+        - epel-release
+        - python3
+      state: latest
+
+  - name: disable SELinux
+    ansible.builtin.replace:
+      path: /etc/sysconfig/selinux
+      regexp: 'SELINUX=enforcing'
+      replace: 'SELINUX=disabled'
+
+  - name: edit ssh pw authentication
+    ansible.builtin.replace:
+      path: /etc/ssh/sshd_config
+      regexp: '#PasswordAuthentication yes'
+      replace: 'PasswordAuthentication yes'     
+
+  - name: disabling ssh root login
+    ansible.builtin.replace:
+      path: /etc/ssh/sshd_config
+      regexp: '#PermitRootLogin yes'
+      replace: 'PermitRootLogin no'
+
+  - name: SSH allow list
+    firewalld:
+      rich_rule: rule family=ipv4 source address="103.82.116.0/22" port port="80" protocol="tcp" accept
+      zone: public
+      permanent: yes
+      immideate: yes
+      state: enabled
+
+  - name: reload firewall
+    command: firewall-cmd --reload 
