@@ -39,8 +39,4 @@ ansible_become_pass='{{ billy_become_pass }}'
 zabbix ansible_host=202.124.252.21 ansible_user=billy ansible_port=22
 
 [centos8:vars]
-<<<<<<< HEAD
 ansible_become_pass='{{ billy_become_pass }}'
-=======
-ansible_become_pass='{{ billy_become_pass }}'
->>>>>>> f14ab302b29461a0d869989c31a41f4eacaf0e1b
