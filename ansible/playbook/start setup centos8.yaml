@@ -39,7 +39,7 @@
       rich_rule: rule family=ipv4 source address="103.82.116.0/22" port port="80" protocol="tcp" accept
       zone: public
       permanent: yes
-      immideate: yes
+      immediate: yes
       state: enabled
 
   - name: reload firewall
