@@ -16,6 +16,7 @@ scores.append(int(input("수학 >>> "))) # 리스트에 두번째항 추가
 scores.append(int(input("영어 >>> "))) # 리스트에 세번째 항 추가
 print("국어: %d"%scores[0]," 수학: %d"%scores[1]," 영어: %d"%scores[2]) #formatting 구버전
 print("국어: {0}".format(scores[0])," 수학: {0}".format(scores[1])," 영어: {0}".format(scores[2])) #위와 동일 신버전
+print(f"국어: {scores[0]}", f" 수학: {scores[1]}", f" 영어: {scores[2]}") # fstring formatting
 def total_scores():  # 점수를 합산해주는 함수
     return sum(scores) # sum으로 리스트내부의 항목을 전부 더한다
 def number_scores(): # 점수항목의 갯수를 표현하는 함수
