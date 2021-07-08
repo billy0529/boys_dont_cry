@@ -41,3 +41,60 @@ print(" / ".join(myself))
 # &, or binary 얀산
 # & 이진수 and 연산 
 # or or 연산
+# 비교연산자 == != <> >= <=
+
+# 할당연산자 
+a = 10
+a = a * 10
+a *= 10 # 위와 동일
+
+# 멤버쉽연산자 
+a = [1,2,3,4]
+b = 3 in a
+print(b)
+
+# 바이트리터럴
+a = b"123" # 앞에 b를 붙여서 바이트리터럴 (아스키코드)처리한다
+
+# break, continue
+i = 0
+sum = 0
+while True:
+    i += 1
+    if i == 5:
+        continue # while문을 다시 시작한다.
+    if i > 10:
+        break
+    sum += i
+print(sum)
+
+# range 함수 (min,max,step) max값은 -1 해야한다. 0부터 시작이므로
+for i in range(10): # 루프를 10번 사용하도록 range함수를 이렇게 활용한다.
+    print("Hello")
+
+# 리스트 인덱싱
+# -1 마지막, -2는 마지막에서 두번째, (::-1)는 거꾸로 reverse
+
+# 리스트 comprehension 
+# 리스트 안에서 for문을 사용한다.
+# [표현식 for 요소 in 컬렉션 [if 조건식]]
+# 아래는 0~9 까지수를 각각 제곱한갑중 3의 배수만 출력
+list = [n ** 2 for n in range(10) if n % 3 == 0]
+print(list)
+
+# 세트 comprehension
+# {출력표현식 for 요소 in 입력Sequence [if 조건식]}
+oldlist = [1, 1, 2, 3, 3, 4]
+newlist = {i*i for i in oldlist} # 리스트 항목한개씩 제곱한다.
+print(newlist) # {16,1,9,4} 
+
+# 딕셔너리 comprehension
+# {Key:Value for 요소 in 입력 Sequence [if 조건식]}
+id_name = {1: '박진수', 2: '강만진', 3: '홍수정'}
+name_id = {val:key for key,val in id_name.items()} # 키와 value를 뒤바꾼다.
+print(name_id) # {'박진수': 1, '강만진': 2, '홍수정': 3}
+##
+def isodd(val):
+    return val % 2 == 1
+mydict = {x:x*x for x in range(101) if isodd(x)} # 1-100중 숫자를 키, 숫자제곱을 밸류. 단 홀수만.
+print(mydict)
