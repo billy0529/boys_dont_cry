@@ -28,6 +28,33 @@ if number % 3 == 0: # 3의 배수인지 확인
 elif number % 3 != 0:
     print("{}는 3의 배수가 아닙니다.".format(number))
 
+#.format 
+# :< Left aligns the result (within the available space)
+# :> Right aligns the result (within the available space)
+# :^ Center aligns the result (within the available space)
+# := Places the sign to the left most position
+# :+ Use a plus sign to indicate if the result is positive or negative
+# :- Use a minus sign for negative values only
+# :  Use a space to insert an extra space before positive numbers (and a minus sign before negative numbers)
+# :, Use a comma as a thousand separator
+# :_ Use a underscore as a thousand separator
+# :b Binary format
+# :c Converts the value into the corresponding unicode character
+# :d Decimal format
+# :e Scientific format, with a lower case e
+# :E Scientific format, with an upper case E
+# :f Fix point number format
+# :F Fix point number format, in uppercase format (show inf and nan as INF and NAN)
+# :g General format
+# :G General format (using a upper case E for scientific notations)
+# :o Octal format
+# :x Hex format, lower case
+# :X Hex format, upper case
+# :n Number format
+# :% Percentage format
+"{0:b}".format(37)     # convert to binary. result 100101
+int("100101",2) # convert binary to decimal
+
 # .join 
 myself = ["sejin", "billy", "1980"] # 문자열만 가능
 print(" / ".join(myself))
@@ -78,12 +105,14 @@ for i in range(10): # 루프를 10번 사용하도록 range함수를 이렇게 �
 # 리스트 comprehension 
 # 리스트 안에서 for문을 사용한다.
 # [표현식 for 요소 in 컬렉션 [if 조건식]]
+# [이렇게 실행하라, 항목 i에 대해서, 만약 i가 이 조건일때만.(문장 순서가 반대)]
 # 아래는 0~9 까지수를 각각 제곱한갑중 3의 배수만 출력
 list = [n ** 2 for n in range(10) if n % 3 == 0]
 print(list)
 
 # 세트 comprehension
 # {출력표현식 for 요소 in 입력Sequence [if 조건식]}
+# [이렇게 실행하라, 항목 i에 대해서, 만약 i가 이 조건일때만.(문장 순서가 반대)]
 oldlist = [1, 1, 2, 3, 3, 4]
 newlist = {i*i for i in oldlist} # 리스트 항목한개씩 제곱한다.
 print(newlist) # {16,1,9,4} 
