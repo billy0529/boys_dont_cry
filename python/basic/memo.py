@@ -59,12 +59,20 @@ int("100101",2) # convert binary to decimal
 myself = ["sejin", "billy", "1980"] # 문자열만 가능
 print(" / ".join(myself))
 
+# 비트와이즈 bitwise operator
+# & (Binary AND) : bit 단위로 and연산을 합니다.  # 홀짝문제 자주 사용
+1 & 1 #1 
+2 & 1 #0
+# | (Binary OR) : bit 단위로 or연산을 합니다. 
+# ^ (Binary XOR) : bit 단위로 xor연산을 합니다. 
+# ~ (Binary NOT) : bit 단위로 not연산을 합니다.(1의 보수) 
+# << (Binary left Shift) : bit 단위로 왼쪽으로 비트단위 밀기 연산을 합니다. 
+# >> (Binary right Shift) : bit 단위로 오른쪽으로 비트단위 밀기 연산을 합니다.
 # and 연산
 # >>> 10 and 12
 # 10  <--- x 값이 True이면 y값을 리턴
 # >>> 0 and 12
 # 0 <--- x 값이 False면 x값 리턴
-
 # &, or binary 얀산
 # & 이진수 and 연산 
 # or or 연산
@@ -132,3 +140,15 @@ def isodd(val):
     return val % 2 == 1
 mydict = {x:x*x for x in range(101) if isodd(x)} # 1-100중 숫자를 키, 숫자제곱을 밸류. 단 홀수만.
 print(mydict)
+
+#절대값 absolute value
+abs(-9) # 9
+abs(9) # 9
+
+#eval함수  str을 받아서 int로 실행이 가능한 연산이여야 함. 
+eval("5 + 3") # 8
+eval('"sejin" + "han"')
+b = eval("100 + 32")
+print(f'2. eval("100 + 32") : {b}')  
+print(eval("+".join(input())))   ## 인풋값으로 받은 수의 각 자리수 합산
+
