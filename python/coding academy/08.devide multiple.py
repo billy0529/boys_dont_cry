@@ -14,7 +14,3 @@
 # eval(a) 의 출력값 6 
 
 print(eval('+'.join('*'.join(str(x)) for x in range(10, 1001))))
-
-        
-
-

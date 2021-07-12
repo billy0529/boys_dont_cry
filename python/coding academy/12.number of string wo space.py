@@ -3,4 +3,3 @@
 
 def count_str(x):
     print(len(str(x)) - (x.count(" ")) - (x.count("\n")))
-   

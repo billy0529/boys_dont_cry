@@ -8,4 +8,3 @@ for hour in range(0,24):
     for minute in range(0,60):
         if "3" in str(hour) or "3" in str(minute):
             sumsec += 60
-print(sumsec)

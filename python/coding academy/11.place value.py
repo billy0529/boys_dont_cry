@@ -6,6 +6,3 @@ def place_digit():
     while x <= 0:
         x = int(input("Please input positive number:  "))
     print("Place number of {0} is {1}".format(x,len(str(x))))
-
-
-place_digit()

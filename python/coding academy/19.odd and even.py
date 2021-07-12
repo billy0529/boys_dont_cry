@@ -16,5 +16,3 @@ def numbers(x):
         else:
             odd += 1
     print("Even numbers are {}, Odd numbers are {}".format(even,odd))
-
-numbers([200,400,500,600,700])

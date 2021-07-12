@@ -5,4 +5,3 @@
 
 def binary(x):
     print("Binary of decimal {0} is {0:b}".format(x))
-

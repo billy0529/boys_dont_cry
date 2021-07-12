@@ -7,4 +7,3 @@
 def aver(x):
     aver = sum(x)//len(x)
     print("Average: {}".format(aver))
-

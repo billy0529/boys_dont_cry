@@ -9,5 +9,4 @@
 
 def do(alist):
     return [x for x in alist if x < 0] + [x for x in alist if x >= 0]
-print(do([-1, 1, 3, -2, 2]))
 

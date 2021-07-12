@@ -2,5 +2,3 @@
 
 def place_digit(x):
     print("{}의 자릿수".format(10 ** (len(str(x)) - 1)))
-
-place_digit(5000)

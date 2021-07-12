@@ -9,10 +9,9 @@ def number(x):
     for i in str(x):
         y += int(i)
     print(y)
-number(555)
+
 
 
 # eval 함수
 def number2(x):
     print(eval("+".join(str(x))))
-number2(2468)

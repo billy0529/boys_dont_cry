@@ -12,5 +12,3 @@ def pages(x,y):
     if x % y != 0:
         page += 1
     print(page)
-
-pages(33,20)

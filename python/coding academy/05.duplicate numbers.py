@@ -10,5 +10,3 @@
 def number_check(x):
     x = str(x)
     print("true" if len(x) == len(set(x)) == 10 else "false")
-
-number_check(1234567890)

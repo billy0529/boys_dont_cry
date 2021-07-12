@@ -11,6 +11,3 @@ def triple(x):
     lst.append((x[0] * x[1] * x[3])) 
     lst.append((x[0] * x[1] * x[2]))
     print(lst)
-
-
-triple([2,6,3,7])

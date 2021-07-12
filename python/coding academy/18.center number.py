@@ -12,5 +12,3 @@ def cent_numb(x):
         print(x[len(x) // 2])
     else:
         print(((x[(len(x) // 2) -1]) + (x[len(x) // 2])) / 2)
-
-cent_numb([4,15,16,17])

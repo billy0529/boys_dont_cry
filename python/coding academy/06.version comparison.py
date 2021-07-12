@@ -20,9 +20,5 @@ def version_check(x,y):
         print("{0} > {1}".format(y,x))
 
 
-
-version_check("1.9","2.0.5")
-
-
     
         
