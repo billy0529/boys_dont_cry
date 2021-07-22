@@ -95,6 +95,10 @@ a = b"123" # 앞에 b를 붙여서 바이트리터럴 처리한다
 ord("a")
 ord("s")
 
+# range
+range = range(10,1000)
+print(str(list(range)).count("8"))  ## 10부터 1000까지중 8의 갯수총합 888은 8 세개로
+print(list(i for i in range if i % 2 == 0)) #10부터 1000까지중 짝수만
 
 # break, continue
 i = 0
@@ -141,11 +145,12 @@ def isodd(val):
 mydict = {x:x*x for x in range(101) if isodd(x)} # 1-100중 숫자를 키, 숫자제곱을 밸류. 단 홀수만.
 print(mydict)
 
-#절대값 absolute value
+# 절대값 absolute value
 abs(-9) # 9
 abs(9) # 9
 
-#eval함수  str을 받아서 int로 실행이 가능한 연산이여야 함. 
+# eval함수  
+# str을 받아서 int로 실행이 가능한 연산이여야 함. 
 eval("5 + 3") # 8
 eval('"sejin" + "han"')
 b = eval("100 + 32")

@@ -10,3 +10,14 @@
 # 예를 들어 1,3,5,7,9,20,31 은 셀프 넘버 들이다.
 # 1 이상이고 5000 보다 작은 모든 셀프 넘버들의 합을 구하라.
 
+def d_fn(n):
+    y = n
+    while n > 0:
+        y += n % 10
+        n //= 10
+    return y
+
+Z = [d_fn(n) for n in range(5000)]
+A = [n for n in range(5000) if n not in Z]
+print (sum(A))
+
