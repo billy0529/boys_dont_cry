@@ -13,6 +13,8 @@ print(c(5.6))
 
 # 외부 모듈 - 다른사람이 만든 파이썬 파일을 pip로 가져옴
 import pyautogui as pg
-pg.moveTo(500, 500, duration=2)
 
+pg.moveTo(500, 500, duration=2)
+pg.click()
+pg.write("HAN JAEIN", interval=0.25)
 
