@@ -96,9 +96,9 @@ ord("a")
 ord("s")
 
 # range
-range = range(10,1000)
-print(str(list(range)).count("8"))  ## 10부터 1000까지중 8의 갯수총합 888은 8 세개로
-print(list(i for i in range if i % 2 == 0)) #10부터 1000까지중 짝수만
+rge = range(10,1000)
+print(str(list(rge)).count("8"))  ## 10부터 1000까지중 8의 갯수총합 888은 8 세개로
+print(list(i for i in rge if i % 2 == 0)) #10부터 1000까지중 짝수만
 
 # break, continue
 i = 0
@@ -112,10 +112,6 @@ while True:
     sum += i
 print(sum)
 
-# range 함수 (min,max,step) max값은 -1 해야한다. 0부터 시작이므로
-for i in range(10): # 루프를 10번 사용하도록 range함수를 이렇게 활용한다.
-    print("Hello")
-
 # 리스트 인덱싱
 # -1 마지막, -2는 마지막에서 두번째, (::-1)는 거꾸로 reverse
 
@@ -124,8 +120,8 @@ for i in range(10): # 루프를 10번 사용하도록 range함수를 이렇게 �
 # [표현식 for 요소 in 컬렉션 [if 조건식]]
 # [이렇게 실행하라, 항목 i에 대해서, 만약 i가 이 조건일때만.(문장 순서가 반대)]
 # 아래는 0~9 까지수를 각각 제곱한갑중 3의 배수만 출력
-list = [n ** 2 for n in range(10) if n % 3 == 0]
-print(list)
+lst = [n ** 2 for n in range(10) if n % 3 == 0]
+print(lst)
 
 # 세트 comprehension
 # {출력표현식 for 요소 in 입력Sequence [if 조건식]}
@@ -155,5 +151,19 @@ eval("5 + 3") # 8
 eval('"sejin" + "han"')
 b = eval("100 + 32")
 print(f'2. eval("100 + 32") : {b}')  
-print(eval("+".join(input())))   ## 인풋값으로 받은 수의 각 자리수 합산
+# print(eval("+".join(input())))   ## 인풋값으로 받은 수의 각 자리수 합산
 
+# 데코레이터
+def decorator_with_arguments(function): 
+    def wrapper_accepting_arguments(arg1, arg2): 
+        print("My arguments are: {0}, {1}".format(arg1, arg2)) 
+        function(arg1, arg2) 
+        return wrapper_accepting_arguments 
+        # modifier function의 이름을 써준다. 
+@decorator_with_arguments 
+def cities(city_one, city_two): 
+    print("Cities I love are {0} and {1}".format(city_one, city_two)) 
+    # var = decorator_with_arguments(cities) # var("Suwon", "Seoul") 이 두줄이 필요 없어진다. #
+    #  cities 함수의 정의가 바뀌었으니 argument로 넣지 않고 바로 그대로 쓴다. cities("Suwon", "Seoul")
+
+    
