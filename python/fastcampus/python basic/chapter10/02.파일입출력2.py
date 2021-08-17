@@ -14,8 +14,7 @@ file.close()#
 
 
 # 2. pickle 파일을 파이썬으로 가져오기# 
-file = open("billy.pickle", "rb")
+file = open("billy.pickle", "rb") # rb: read binary
 data = pickle.load(file)
 print(data)
 file.close()
-

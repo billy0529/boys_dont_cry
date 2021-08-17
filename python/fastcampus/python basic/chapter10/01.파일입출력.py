@@ -9,26 +9,27 @@
 # a : 이어쓰기
 # import pickle
 
+# "r"   Opens a file for reading only.
+# "r+"  Opens a file for both reading and writing.
+# "rb"  Opens a file for reading only in binary format.
+# "rb+" Opens a file for both reading and writing in binary format.
+# "w"   Opens a file for writing only.
+# "a"   Open for writing.  The file is created if it does not exist.
+# "a+"  Open for reading and writing.  
+#       The file is created if it does not exist.
+
 # 파일 쓰기
 file = open("data.txt", "w", encoding="utf-8")
 file.write("1. 파이썬기본")
 file.close()
 
-# 파일 추가
-file = open("data.txt", "a")
-file.write("\n2. 파이썬심화")
-file.close()
+file1 = open("data.txt", "a", encoding="utf-8")
+file1.write("\n2. 파이썬심화")
+file1.write("\n3. 자세히")
+file1.close()
 
-# 파일 전체 읽기 
-file = open("data.txt", "r", encoding="utf-8")
-# data = file.read()
-# print(data)
-# file.close()
+file2 = open("data.txt")
+file_read = file2.read()
+print(file_read)
+file2.close()
 
-# 파일 한 줄 읽기
-while True:
-    data = file.readline()
-    print(data, end = "")
-    if data == "":
-        break
-file.close()
